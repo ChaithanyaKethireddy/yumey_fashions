@@ -101,6 +101,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (id === 'catalog') renderCatalog();
         if (id === 'wishlist') renderWishlist();
         if (id === 'checkout') renderCheckoutSummary();
+        if (id === 'lookbook-ete') window.scrollTo({top:0});
+        if (id === 'lookbook-editorial') window.scrollTo({top:0});
+        if (id === 'elegancia-atemporal') window.scrollTo({top:0});
 
         // Close overlays
         cartSidebar.classList.remove('open');
@@ -137,6 +140,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // ─── OVERLAYS ────────────────────────────────
+    document.getElementById('cart-trigger')?.addEventListener('click', e => {
+        e.preventDefault();
+        cartSidebar.classList.add('open');
+    });
+    document.getElementById('cart-close')?.addEventListener('click', () => {
+        cartSidebar.classList.remove('open');
+    });
+    document.getElementById('menu-open')?.addEventListener('click', () => {
+        mobileMenu.classList.add('open');
+    });
+    document.getElementById('menu-close')?.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+    });
+
     // ─── TOAST ────────────────────────────────────
     function showToast(msg, type = 'success') {
         toast.textContent = msg;
@@ -150,7 +168,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const c = document.getElementById('home-featured-products');
         if (!c) return;
         c.innerHTML = '';
-        products.slice(0, 3).forEach(p => c.appendChild(createCard(p)));
+        // Show 4 products on home instead of 3 for a better grid
+        products.slice(0, 4).forEach(p => c.appendChild(createCard(p)));
     }
 
     // ─── RENDER CATALOG ───────────────────────────
